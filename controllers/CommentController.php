@@ -44,4 +44,23 @@ class CommentController
         // On redirige vers la page de l'article.
         Utils::redirect("showArticle", ['id' => $idArticle]);
     }
+
+    public function deleteComment(): void
+    {
+        $commentId = Utils::request('id', -1);
+        $articleId = Utils::request('articleId', -1);
+
+        if ($commentId > 0 && $articleId > 0)
+            {
+                $commentManager = new CommentManager();
+                $comment = $commentManager->getCommentById($commentId);
+                $commentManager->deleteComment($comment);
+
+                Utils::redirect("showArticle", ['id' => $articleId]);
+            }
+        else 
+            {
+                throw new Exception("Paramètres invalides");
+            }
+    }
 }

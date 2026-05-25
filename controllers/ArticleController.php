@@ -26,6 +26,7 @@ class ArticleController
 
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticleById($id);
+        $articleManager->addViews($id);
         
         if (!$article) {
             throw new Exception("L'article demandé n'existe pas.");
@@ -34,8 +35,10 @@ class ArticleController
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);
 
+        $isAdmin = !empty($_SESSION['user']);
+
         $view = new View($article->getTitle());
-        $view->render("detailArticle", ['article' => $article, 'comments' => $comments]);
+        $view->render("detailArticle", ['article' => $article, 'comments' => $comments, 'isAdmin' => $isAdmin]);
     }
 
     /**
@@ -56,4 +59,5 @@ class ArticleController
         $view = new View("A propos");
         $view->render("apropos");
     }
+
 }

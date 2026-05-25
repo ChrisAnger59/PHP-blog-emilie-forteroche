@@ -273,6 +273,10 @@ a.info {
     color: var(--quoteColor);
 }
 
+.detailComment {
+    width: 100%;
+}
+
 /* On redéfinit certaines parties du "info" pour l'affichage dans les commentaires */
 .detailComment .info {
     margin: 5px 0 5px 0;
@@ -281,6 +285,15 @@ a.info {
 
 .detailComment .content {
     margin: 5px 0 5px 0;
+}
+
+
+
+.delete {
+    background-color: var(--titleColor);
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
 }
 
 /* Page d'erreur */
@@ -349,4 +362,23 @@ footer {
     padding: 20px;
     color: white;
     background-color: var(--headerColor);
+}
+
+table {
+    width: 100%;
+}
+
+table td, table th{
+    color: white;
+    padding: 20px;
+    border: 0px solid var(--backgroundColor);
+    text-align: center;
+}
+
+.paire {
+    background-color: #727925
+}
+
+.impaire {
+    background-color: var(--commentPaleColor);
 }

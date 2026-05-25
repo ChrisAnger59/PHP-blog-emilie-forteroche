@@ -32,6 +32,10 @@
                 echo '      <h3 class="info">Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ", " . Utils::format($comment->getPseudo()) . ' a écrit :</h3>';
                 echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
                 echo '  </div>';
+                if ($isAdmin)
+                    {
+                    echo '<a class="delete" href="index.php?action=deleteComment&id='.$comment->getId().'&articleId='.$article->getId().'" '.Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce commentaire ?").'>Supprimer</a>';
+                    }
                 echo '</li>';
             }               
             echo '</ul>';

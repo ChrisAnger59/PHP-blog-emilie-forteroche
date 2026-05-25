@@ -92,4 +92,30 @@ class ArticleManager extends AbstractEntityManager
         $sql = "DELETE FROM article WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
     }
+
+    public function addViews(int $id): void
+    {
+        $sql ="UPDATE `article` SET `views` = `views` + 1 WHERE `id` = :id;";
+        $this->db->query($sql, ['id' => $id]);
+    }
+
+    public function mergeCommentsAndArticles(): array
+    {
+        $articles = $this->getAllArticles();
+
+        $comments = new CommentManager();
+        $nbComments = $comments->getAmountCommentsByArticle();
+
+        foreach ($articles as &$article)
+            {
+                $id = $article->getId();
+
+                $count = $nbComments[$id] ?? 0;
+
+                $article->setComCount($count);
+            }
+
+            return $articles;
+    }
+
 }

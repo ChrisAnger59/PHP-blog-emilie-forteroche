@@ -26,6 +26,57 @@ class AdminController {
     }
 
     /**
+     * Affiche la page de monitoring
+     */
+    public function showMonitor(): void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        $this->checkIfUserIsConnected();
+
+        // On récupère les articles et le nombre de commentaires 
+        $articleManager = new ArticleManager;
+        $articles = $articleManager->mergeCommentsAndArticles();
+
+        $allowedSorts = ['title', 'date', 'com', 'views'];
+        $allowedOrders = ['asc', 'desc'];
+
+        $sort = in_array(Utils::request('sort') ?? '', $allowedSorts) ? Utils::request('sort') : 'date';
+        $order = in_array(Utils::request('order') ?? '', $allowedOrders) ? Utils::request('order') : 'desc';
+
+        // trie le tableau
+        usort($articles, function($a, $b) use ($sort, $order) {
+
+            if ($sort === 'title') {
+                $result = strcmp($a->getTitle(), $b->getTitle());
+            } elseif ($sort === 'date') {
+                $result = $a->getDateCreation() <=> $b->getDateCreation();
+            } elseif ($sort === 'com') {
+                $result = $a->getComCount() <=> $b->getComCount();
+            } elseif ($sort === 'views') {
+                $result = $a->getViews() <=> $b->getViews();
+            } else {
+                $result = 0;
+            }
+
+            // Comme usort() ne se base que sur le signe (- ou +)
+            // -$result = inverse de $result
+            if ($order === 'desc') {
+                return $result;
+            } else {
+                return -$result;
+            }
+        });
+        
+        
+        // On affiche la page de Monitoring.
+        // On envois les données $articles et $commentsCount à la vue
+        $view = new View("Moniteur");
+        $view->render("monitorArticle", [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
      * Vérifie que l'utilisateur est connecté.
      * @return void
      */
