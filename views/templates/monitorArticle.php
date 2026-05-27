@@ -13,7 +13,7 @@
 
 <h2>Suivi des Articles</h2>
 
-    <table>
+    <table class="articleLine">
         <tr class="impaire">
             <th>Titre <a href="<?= $baseUrl ?>&sort=title&order=desc">&#11015</a><a href="<?= $baseUrl ?>&sort=title&order=asc">&#11014</a></th>
             <th>Date <a href="<?= $baseUrl ?>&sort=date&order=desc">&#11015</a><a href="<?= $baseUrl ?>&sort=date&order=asc">&#11014</a></th>
@@ -25,7 +25,7 @@
         <?php foreach ($articles as $article) : ?>
 
             <tr class="<?= ($index % 2 === 0) ? 'paire' : 'impaire' ?>">
-                <td><?= $article->getTitle() ?></td>
+                <td class="title"><?= $article->getTitle() ?></td>
                 <td><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>
                 <td><?= $article->getComCount() ?></td>
                 <td><?= $article->getViews() ?></td>

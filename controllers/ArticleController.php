@@ -35,10 +35,8 @@ class ArticleController
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);
 
-        $isAdmin = !empty($_SESSION['user']);
-
         $view = new View($article->getTitle());
-        $view->render("detailArticle", ['article' => $article, 'comments' => $comments, 'isAdmin' => $isAdmin]);
+        $view->render("detailArticle", ['article' => $article, 'comments' => $comments]);
     }
 
     /**

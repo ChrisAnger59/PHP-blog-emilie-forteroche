@@ -364,10 +364,6 @@ footer {
     background-color: var(--headerColor);
 }
 
-table {
-    width: 100%;
-}
-
 table td, table th{
     color: white;
     padding: 20px;

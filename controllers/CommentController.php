@@ -47,20 +47,26 @@ class CommentController
 
     public function deleteComment(): void
     {
-        $commentId = Utils::request('id', -1);
-        $articleId = Utils::request('articleId', -1);
+        if (isset($_SESSION['user'])){
+        
+            $commentId = Utils::request('id', -1);
+            $articleId = Utils::request('articleId', -1);
 
-        if ($commentId > 0 && $articleId > 0)
-            {
-                $commentManager = new CommentManager();
-                $comment = $commentManager->getCommentById($commentId);
-                $commentManager->deleteComment($comment);
+            if ($commentId > 0 && $articleId > 0)
+                {
+                    $commentManager = new CommentManager();
+                    $comment = $commentManager->getCommentById($commentId);
+                    $commentManager->deleteComment($comment);
 
-                Utils::redirect("showArticle", ['id' => $articleId]);
-            }
-        else 
-            {
-                throw new Exception("Paramètres invalides");
-            }
+                    Utils::redirect("showArticle", ['id' => $articleId]);
+                }
+            else 
+                {
+                    throw new Exception("Paramètres invalides");
+                }
+        }
+        else {
+            throw new Exception("Action impossible, vous n'êtes pas admin");
+        }
     }
 }
