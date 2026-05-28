@@ -16,7 +16,7 @@ class View
     /**
      * Constructeur. 
      */
-    public function __construct($title) 
+    public function __construct(string $title) 
     {
         $this->title = $title;
     }

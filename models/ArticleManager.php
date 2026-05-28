@@ -101,14 +101,19 @@ class ArticleManager extends AbstractEntityManager
         $this->db->query($sql, ['id' => $id]);
     }
 
+
+    // Ajoute à chaque Article, son nombre de commentaires
     public function mergeCommentsAndArticles(): array
     {
+        // On récupère tous les Articles 
         $articles = $this->getAllArticles();
 
+        // On récupère tous les commentaires
         $comments = new CommentManager();
         $nbComments = $comments->getAmountCommentsByArticle();
 
-        foreach ($articles as &$article)
+        // Pour chaque éléments du tableau retourné par getAllArticle()
+        foreach ($articles as $article)
             {
                 $id = $article->getId();
 
