@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 class ArticleController 
 {
     /**
@@ -21,8 +23,9 @@ class ArticleController
      */
     public function showArticle() : void
     {
-        // Récupération de l'id de l'article demandé.
+        // Récupération de l'id de l'article demandé et transformation en INT
         $id = Utils::request("id", -1);
+        $id = filter_var($id, FILTER_VALIDATE_INT);
 
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticleById($id);

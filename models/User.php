@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Entité User : un user est défini par son id, un login et un password.
  */ 

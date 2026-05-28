@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Entité Article, un article est défini par les champs
  * id, id_user, title, content, date_creation, date_update
@@ -73,11 +75,14 @@
         if ($length > 0) {
             // Ici, on utilise mb_substr et pas substr pour éviter de couper un caractère en deux (caractère multibyte comme les accents).
             $content = mb_substr($this->content, 0, $length);
+
             if (strlen($this->content) > $length) {
                 $content .= "...";
             }
+
             return $content;
         }
+        
         return $this->content;
     }
 

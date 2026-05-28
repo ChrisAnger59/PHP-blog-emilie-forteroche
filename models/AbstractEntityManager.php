@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Classe abstraite qui représente un manager. Elle récupère automatiquement le gestionnaire de base de données.
  * Elle utilise le pattern Singleton de DBManager pour récupérer une instance unique de connexion
@@ -7,7 +9,7 @@
  */
 abstract class AbstractEntityManager {
     
-    protected $db;
+    protected DBManager $db;
 
     /**
      * Constructeur de la classe.

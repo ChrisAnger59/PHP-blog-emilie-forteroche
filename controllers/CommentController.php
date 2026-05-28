@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class CommentController 
 {
     /**
@@ -12,6 +14,7 @@ class CommentController
         $pseudo = Utils::request("pseudo");
         $content = Utils::request("content");
         $idArticle = Utils::request("idArticle");
+        $idArticle = filter_var($idArticle, FILTER_VALIDATE_INT);
 
         // On vérifie que les données sont valides.
         if (empty($pseudo) || empty($content) || empty($idArticle)) {
@@ -50,7 +53,9 @@ class CommentController
         if (isset($_SESSION['user'])){
         
             $commentId = Utils::request('id', -1);
+            $commentId = filter_var($commentId, FILTER_VALIDATE_INT);
             $articleId = Utils::request('articleId', -1);
+            $articleId = filter_var($articleId, FILTER_VALIDATE_INT);
 
             if ($commentId > 0 && $articleId > 0)
                 {

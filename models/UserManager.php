@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /** 
  * Classe UserManager pour gérer les requêtes liées aux users et à l'authentification.
  */

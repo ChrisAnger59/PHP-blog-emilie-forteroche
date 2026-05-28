@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Cette classe sert à gérer les commentaires. 
  */

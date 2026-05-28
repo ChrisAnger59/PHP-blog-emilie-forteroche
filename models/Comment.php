@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Entité représentant un commentaire.
  * Avec les champs id, pseudo, content, et idArticle.

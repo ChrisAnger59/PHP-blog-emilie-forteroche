@@ -1,4 +1,7 @@
 <?php 
+
+declare(strict_types=1);
+
 /**
  * Contrôleur de la partie admin.
  */
@@ -157,6 +160,7 @@ class AdminController {
 
         // On récupère l'id de l'article s'il existe.
         $id = Utils::request("id", -1);
+        $id = filter_var($id, FILTER_VALIDATE_INT);
 
         // On récupère l'article associé.
         $articleManager = new ArticleManager();
@@ -185,6 +189,7 @@ class AdminController {
 
         // On récupère les données du formulaire.
         $id = Utils::request("id", -1);
+        $id = filter_var($id, FILTER_VALIDATE_INT);
         $title = Utils::request("title");
         $content = Utils::request("content");
 
@@ -219,6 +224,7 @@ class AdminController {
         $this->checkIfUserIsConnected();
 
         $id = Utils::request("id", -1);
+        $id = filter_var($id, FILTER_VALIDATE_INT);
 
         // On supprime l'article.
         $articleManager = new ArticleManager();
